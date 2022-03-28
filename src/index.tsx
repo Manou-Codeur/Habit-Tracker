@@ -5,6 +5,8 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import FetchError from "./Components/errorBoundaries/fetchError";
 
+import "./index.scss";
+
 ReactDOM.render(
   <React.StrictMode>
     <FetchError>
