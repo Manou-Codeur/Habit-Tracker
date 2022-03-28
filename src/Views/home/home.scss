@@ -1,3 +1,5 @@
+@import "../../Assets/scss/vars&mixins.scss";
+
 .home {
   display: flex;
   justify-content: center;
@@ -18,27 +20,19 @@
       margin-top: 2em;
 
       .link {
-        background: #f3e6dd;
-        text-decoration: none;
-        color: #d87355;
+        background: $primaryColor;
+        color: $secondaryColor;
         padding: 1.2em;
         font-size: 1em;
-        font-weight: 600;
-        border-radius: 9px;
         text-align: center;
-        cursor: pointer;
-        transition: all 0.5s;
         width: 15em;
         border: 1px solid;
         display: inline-block;
+        @include linkCommonStyle;
 
         &:nth-of-type(1) {
           margin-right: 2em;
           margin-bottom: 0.5em;
-        }
-
-        &:hover {
-          opacity: 0.5;
         }
       }
     }

@@ -1,9 +1,11 @@
+@import "../../Assets/scss/vars&mixins.scss";
+
 .navBar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1.5em;
-  color: #d87355;
+  color: $secondaryColor;
 
   &__logo {
     width: auto;
@@ -30,20 +32,11 @@
   &__mobile {
     .link {
       background: transparent;
-      text-decoration: none;
-      color: #d87355;
-
+      color: $secondaryColor;
       border: 0;
       padding: 0.7em;
       font-size: 0.95em;
-      font-weight: 600;
-      border-radius: 9px;
-      cursor: pointer;
-      transition: all 0.5s;
-
-      &:hover {
-        opacity: 0.5;
-      }
+      @include linkCommonStyle;
     }
   }
 
