@@ -3,11 +3,13 @@
   justify-content: space-between;
   align-items: center;
   padding: 1.5em;
+  color: #d87355;
 
   &__logo {
     width: auto;
     font-family: Lobster, sans-serif;
     font-size: 2em;
+    cursor: pointer;
   }
 
   &__btns {
@@ -26,10 +28,11 @@
 
   &__btns,
   &__mobile {
-    .test {
+    .link {
       background: transparent;
       text-decoration: none;
-      color: black;
+      color: #d87355;
+
       border: 0;
       padding: 0.7em;
       font-size: 0.95em;

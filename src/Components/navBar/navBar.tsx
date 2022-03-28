@@ -15,23 +15,25 @@ const NavBar = () => {
       <div className="navBar__btns">
         {true ? (
           <>
-            <Link className="test" to="/auth/signIn">
+            <Link className="link" to="/auth/signIn">
               Sign Up
             </Link>
-            <Link className="test" to="/auth/signUp">
-              Log In
+            <Link className="link" to="/auth/signUp">
+              Sign In
             </Link>
           </>
         ) : (
-          <button onClick={doSignOut}>Log Out</button>
+          <Link className="link" to="/">
+            Log Out
+          </Link>
         )}
       </div>
       <div className="navBar__mobile">
-        <Link className="test" to="/auth/signIn">
+        <Link className="link" to="/auth/signIn">
           Sign Up
         </Link>
-        <Link className="test" to="/auth/signUp">
-          Log In
+        <Link className="link" to="/auth/signUp">
+          Sign In
         </Link>
       </div>
     </div>
