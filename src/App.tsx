@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 
 import Home from "./Views/home/home";
 import Auth from "./Layouts/auth/auth";
@@ -10,13 +10,13 @@ const App = () => {
   return (
     <>
       <NavBar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/auth" element={<Auth />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/notFound" element={<NotFound />} />
-        <Route path="*" element={<Navigate to="/notFound" />} />
-      </Routes>
+      <Switch>
+        <Route path="/home" exact component={Home} />
+        <Route path="/dashboard" component={Dashboard} />
+        <Route path="/auth" component={Auth} />
+        <Redirect from="/" exact to="/home" />
+        <Route component={NotFound} />
+      </Switch>
     </>
   );
 };
