@@ -1,0 +1,86 @@
+@import "../../../Assets/scss/vars&mixins.scss";
+
+.habit-item {
+    margin: 1em 0;
+    font-weight: 500;
+    display: flex;
+
+    &__progress {
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+        background-color: $primaryColor;
+        padding: 1em 1.5em;
+        border-radius: 10em;
+        width: 85%;
+
+
+        .habit-item__progress_done {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: $secondaryColor;
+            width: 95%;
+            height: 100%;
+            border-radius: inherit;
+            z-index: 5;
+        }
+
+        .habit-item__name {
+            color: white;
+            z-index: 10;
+        }
+        
+        .habit-item__time-left {
+            color: #903010;
+            z-index: 10;
+        }
+
+    }
+
+    &__btns {
+        display: flex;
+        justify-content: space-evenly;
+        width: 15%;
+        min-width: 10em;
+
+        .add, .minus, .remove {
+            width: 3em;
+            height: 3em;
+            border-radius: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        
+        .add {
+            background-color: $secondaryColor;
+            color: white;
+        }
+        
+        .minus {
+            background-color: $primaryColor;
+            color: $secondaryColor;
+        }
+        
+        .remove {
+            border: 2px solid $primaryColor;
+
+            svg {
+                height: 1em;
+                fill: $secondaryColor;
+            }
+        }
+    }
+
+    @media only screen and (max-width: 780px) {
+     flex-direction: column;   
+     
+     &__progress {
+         width: 100%;
+         margin-bottom: 1em;
+     }
+    }
+
+}

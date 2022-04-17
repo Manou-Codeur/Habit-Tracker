@@ -1,5 +1,17 @@
+import HabitItem from "./habitItem/habitItem";
+
+import "./dashboard.scss";
+
 const Dashboard = () => {
-  return <h1>Dashboard</h1>;
+  return (
+    <div className="dashboard">
+      <button>Add New Habit</button>
+      <div className="dashboard__habits-containner">
+        <HabitItem />
+        <HabitItem />
+      </div>
+    </div>
+  );
 };
 
 export default Dashboard;

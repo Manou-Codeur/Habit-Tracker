@@ -1,0 +1,25 @@
+@import "../../Assets/scss/vars&mixins.scss";
+
+.dashboard {
+    padding: 1em 1.5em;
+    
+    button {
+        background: $primaryColor;
+        color: $secondaryColor;
+        padding: 1em 2em;
+        font-size: 1em;
+        border: 1px solid;
+        @include linkCommonStyle;
+    }
+
+    &__habits-containner {
+        border: 2px solid $primaryColor;
+        padding: 1em;
+        margin-top: 1.5em;
+        border-radius: 1em;
+    }
+
+    @media only screen and (max-width: 970px) {
+        font-size: 13px;
+    }
+}
