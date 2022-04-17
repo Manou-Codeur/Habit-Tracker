@@ -1,0 +1,27 @@
+@import "../../Assets/scss/vars&mixins.scss";
+
+.input-comp {
+  margin-bottom: 1.5em;
+  width: 28em;
+
+  label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.3em;
+  }
+
+  input {
+    padding: 1em 0.5em;
+    width: 100%;
+    border: 1px solid $gray;
+  }
+
+  &__error {
+    margin-top: 0.3em;
+    color: red;
+  }
+
+  @media screen and (max-width: 500px) {
+    width: 90%;
+  }
+}

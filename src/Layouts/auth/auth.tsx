@@ -1,7 +1,7 @@
 import { Route, Switch, Redirect } from "react-router-dom";
 
-import SignIn from "./../../Views/auth/signIn";
-import SignUp from "./../../Views/auth/signUp";
+import SignIn from "../../Views/auth/signIn/signIn";
+import SignUp from "../../Views/auth/signUp/signUp";
 import NotFound from "./../../Views/NotFound/notFound";
 
 import "./auth.scss";

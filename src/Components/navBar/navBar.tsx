@@ -11,15 +11,18 @@ const NavBar = () => {
 
   return (
     <div className="navBar">
-      <div className="navBar__logo">H-Tracker</div>
+      <a className="navBar__logo" href="/">
+        H-Tracker
+      </a>
+
       <div className="navBar__btns">
         {true ? (
           <>
             <Link className="link" to="/auth/signIn">
-              Sign Up
+              Sign In
             </Link>
             <Link className="link" to="/auth/signUp">
-              Sign In
+              Sign Up
             </Link>
           </>
         ) : (
@@ -30,10 +33,10 @@ const NavBar = () => {
       </div>
       <div className="navBar__mobile">
         <Link className="link" to="/auth/signIn">
-          Sign Up
+          Sign In
         </Link>
         <Link className="link" to="/auth/signUp">
-          Sign In
+          Sign Up
         </Link>
       </div>
     </div>
