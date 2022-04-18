@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import ReactComponent from "../../Assets/img/Habit-Vector.jpg";
+
 import "./home.scss";
 
 const Home = () => {
