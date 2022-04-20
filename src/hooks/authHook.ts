@@ -7,7 +7,7 @@ export const useAuth = () => {
   useEffect(() => {
     try {
       const { user_id, aud } = jwtGenerator<any>(
-        JSON.parse(localStorage.getItem("user-authed"))
+        JSON.parse(localStorage.getItem("user-authed")!)
       );
 
       if (aud !== "habit-tracker-567af") throw new Error();

@@ -6,7 +6,7 @@ import { handleErrors } from "./errorHandling";
 import { MethodsTypes } from "../../Services/firebase/types";
 
 interface Props extends RouteComponentProps<any> {
-  firebase: MethodsTypes;
+  firebase: MethodsTypes | null;
 }
 
 type hocType = (Component: FC, inputs: Array<string>) => FC<Props>;
@@ -37,15 +37,18 @@ const withForm: hocType = (Component, inputs) => props => {
     password: string;
     name: string;
   }) {
+    //This line is to avoid TS error saying "firebase can be null" when i used it in lines 46 48
+    //and i do agree with TS here
+    if (!firebase)
+      throw new Error("There is an unexpected error, try again please!");
     setWaiting(prev => !prev);
     try {
-      let data;
+      let data: any;
       if (formType === "singin") {
         data = await firebase.doSignInWithEmailAndPassword(email, password);
       } else {
         data = await firebase.doCreateUserWithEmailAndPassword(email, password);
 
-        // add the new user to database (optional)
         await firebase.addUser({
           uid: data.user.uid,
           name,
