@@ -13,3 +13,13 @@ export type addUserType = ({
   uid: string;
 }) => void;
 export type getHabitsIdsType = (uid: string) => void;
+
+export interface MethodsTypes {
+  doCreateUserWithEmailAndPassword: signUpType;
+  doSignInWithEmailAndPassword: signInType;
+  doResetPassword: resetPassType;
+  users: usersType;
+  user: userType;
+  addUser: addUserType;
+  getHabitsIds: getHabitsIdsType;
+}

@@ -5,7 +5,7 @@ export const singupSchema = {
   name: Yup.string()
     .matches(/^[a-z ,.'-]+$/i, { message: "Invalid Username" })
     .max(55)
-    .min(8)
+    .min(6)
     .required("Name is required!")
     .trim(),
   email: Yup.string().email("Email is invalid!").required("Email is required!"),

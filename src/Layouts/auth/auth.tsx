@@ -1,14 +1,20 @@
 import { Route, Switch, Redirect } from "react-router-dom";
+import { useContext, FC } from "react";
+import { RouteComponentProps } from "react-router-dom";
 
 import SignIn from "../../Views/auth/signIn/signIn";
 import SignUp from "../../Views/auth/signUp/signUp";
 import NotFound from "./../../Views/NotFound/notFound";
+import FirebaseContext from "./../../Services/firebase/firebaseContext";
 
 import "./auth.scss";
 
+interface Props extends RouteComponentProps<any> {
+  userAuthed: string | null;
+}
+
 const AuthRouter = () => {
-  //i'll comeback to it later
-  const firebase = null;
+  const firebase = useContext(FirebaseContext);
 
   return (
     <Switch>
@@ -28,7 +34,10 @@ const AuthRouter = () => {
   );
 };
 
-const Auth = () => {
+const Auth: FC<Props> = ({ history, userAuthed }) => {
+  //If the user is authed then redirect him to the dashboard component
+  if (userAuthed) history.push("/dashboard");
+
   return (
     <div className="auth">
       <AuthRouter />

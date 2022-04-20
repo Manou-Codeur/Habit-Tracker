@@ -1,35 +1,10 @@
-import { FC, ChangeEvent, FocusEvent } from "react";
+import { FC } from "react";
 
 import Input from "./../../../Components/Input/input";
 import withForm from "./../../../Components/form/form";
+import { SignUpProps } from "../types";
 
-interface Props {
-  handleSubmit: () => void;
-  touched: {
-    email: boolean;
-    password: boolean;
-    confirmPassword: boolean;
-    name: boolean;
-  };
-  errors: {
-    email: string;
-    password: string;
-    confirmPassword: string;
-    name: string;
-  };
-  handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  values: {
-    email: string;
-    password: string;
-    confirmPassword: string;
-    name: string;
-  };
-  handleBlur: (e: FocusEvent<HTMLInputElement>) => void;
-  waiting: boolean;
-  history: any;
-}
-
-const SignUp: FC<Props> = ({
+const SignUp: FC<SignUpProps> = ({
   handleSubmit,
   touched,
   errors,

@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
+import { useAuth } from "./../../hooks/authHook";
 
 import "./navBar.scss";
 
 const NavBar = () => {
-  //will look at it later
+  const userAuthed = useAuth();
+
   const doSignOut = () => {
     localStorage.removeItem("user-authed");
     window.location.reload();
@@ -16,7 +18,7 @@ const NavBar = () => {
       </a>
 
       <div className="navBar__btns">
-        {true ? (
+        {!userAuthed ? (
           <>
             <Link className="link" to="/auth/signIn">
               Sign In
@@ -26,18 +28,10 @@ const NavBar = () => {
             </Link>
           </>
         ) : (
-          <Link className="link" to="/">
+          <Link className="link" to="/" onClick={doSignOut}>
             Log Out
           </Link>
         )}
-      </div>
-      <div className="navBar__mobile">
-        <Link className="link" to="/auth/signIn">
-          Sign In
-        </Link>
-        <Link className="link" to="/auth/signUp">
-          Sign Up
-        </Link>
       </div>
     </div>
   );

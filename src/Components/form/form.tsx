@@ -3,10 +3,10 @@ import { RouteComponentProps } from "react-router-dom";
 
 import { useCustomFormik } from "./helperFunctions";
 import { handleErrors } from "./errorHandling";
+import { MethodsTypes } from "../../Services/firebase/types";
 
-//i'll be back to handle firebase types
 interface Props extends RouteComponentProps<any> {
-  firebase: null;
+  firebase: MethodsTypes;
 }
 
 type hocType = (Component: FC, inputs: Array<string>) => FC<Props>;
@@ -38,34 +38,34 @@ const withForm: hocType = (Component, inputs) => props => {
     name: string;
   }) {
     setWaiting(prev => !prev);
-    // try {
-    //   let data;
-    //   if (formType === "singin") {
-    //     data = await firebase.doSignInWithEmailAndPassword(email, password);
-    //   } else {
-    //     data = await firebase.doCreateUserWithEmailAndPassword(email, password);
+    try {
+      let data;
+      if (formType === "singin") {
+        data = await firebase.doSignInWithEmailAndPassword(email, password);
+      } else {
+        data = await firebase.doCreateUserWithEmailAndPassword(email, password);
 
-    //     // add the new user to database (optional)
-    //     await firebase.addUser({
-    //       uid: data.user.uid,
-    //       name,
-    //       email,
-    //     });
-    //   }
+        // add the new user to database (optional)
+        await firebase.addUser({
+          uid: data.user.uid,
+          name,
+          email,
+        });
+      }
 
-    //   //store the json web token in the localstorage (optional)
-    //   localStorage.setItem(
-    //     "user-authed",
-    //     JSON.stringify(
-    //       data.user.ya.split(".")[0] + "." + data.user.ya.split(".")[1]
-    //     )
-    //   );
-    //   //Go to the home page (optional)
-    //   props.history.push("/");
-    // } catch (error: any) {
-    //   handleErrors(formType, error, setErrors);
-    //   setWaiting(prev => !prev);
-    // }
+      //store the json web token in the localstorage (optional)
+      localStorage.setItem(
+        "user-authed",
+        JSON.stringify(
+          data.user.ya.split(".")[0] + "." + data.user.ya.split(".")[1]
+        )
+      );
+      // props.history.push("/dashboard");
+      window.location.reload();
+    } catch (error: any) {
+      handleErrors(formType, error, setErrors);
+      setWaiting(prev => !prev);
+    }
   }
 
   const moreProps = {

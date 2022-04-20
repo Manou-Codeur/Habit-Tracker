@@ -1,20 +1,11 @@
-import { FC, ChangeEvent, FocusEvent, KeyboardEvent } from "react";
+import { FC, KeyboardEvent } from "react";
 
 import Input from "./../../../Components/Input/input";
 import withForm from "./../../../Components/form/form";
 
-interface Props {
-  handleSubmit: () => void;
-  touched: { email: boolean; password: boolean };
-  errors: { email: string; password: string };
-  handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  values: { email: string; password: string };
-  handleBlur: (e: FocusEvent<HTMLInputElement>) => void;
-  waiting: boolean;
-  history: any;
-}
+import { SignInProps } from "../types";
 
-const SignIn: FC<Props> = ({
+const SignIn: FC<SignInProps> = ({
   handleSubmit,
   touched,
   errors,
@@ -68,6 +59,5 @@ const SignIn: FC<Props> = ({
   );
 };
 
-//the user also need to precise the inputs he wanna use
 const inputs = ["email", "password"];
 export default withForm(SignIn, inputs);
