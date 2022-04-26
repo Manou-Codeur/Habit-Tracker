@@ -14,6 +14,7 @@ interface Props extends RouteComponentProps<any> {
 
 const Dashboard: FC<Props> = ({ history, userAuthed }) => {
   const [habits, setHabits] = useState<habitsType[]>([]);
+  const [httpErrors, setHttpErrors] = useState<any>(null);
 
   const firebase = useContext(FirebaseContext);
 
@@ -36,7 +37,7 @@ const Dashboard: FC<Props> = ({ history, userAuthed }) => {
 
       setHabits(habitsArr);
     } catch (error) {
-      console.log(error);
+      setHttpErrors(error);
     }
   };
 
@@ -76,11 +77,13 @@ const Dashboard: FC<Props> = ({ history, userAuthed }) => {
         left: left,
       });
     } catch (error) {
-      console.log(error);
       setHabits(originalState);
+      setHttpErrors(error);
     }
   };
 
+  //So i can be catched by the error boundary comp
+  if (httpErrors) throw new Error(httpErrors);
   return (
     <div className="dashboard">
       <DashboardForm updateHabits={updateHabits} />
