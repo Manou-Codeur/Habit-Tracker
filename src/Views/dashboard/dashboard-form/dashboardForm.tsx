@@ -1,20 +1,29 @@
 import { FC, useState, ChangeEvent } from "react";
 
-import { habitsManagerType } from "../types";
+import { habitsManagerType, habitsType } from "../types";
 
 interface Props {
   updateHabits: habitsManagerType;
+  habits: habitsType[];
 }
 
 type onChange = (e: ChangeEvent<HTMLInputElement>) => void;
+type checkIfHabitNameExistType = (habitName: string) => boolean;
 
-const DashboardForm: FC<Props> = ({ updateHabits }) => {
+const DashboardForm: FC<Props> = ({ updateHabits, habits }) => {
   const [input, setInput] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
 
   const handleOnChange: onChange = ({ target }) => {
     setInput(target.value);
     setError(null);
+  };
+
+  const checkIfHabitNameExist: checkIfHabitNameExistType = habitName => {
+    for (let habit of habits) {
+      if (habit.name === habitName) return true;
+    }
+    return false;
   };
 
   //I used "any" to avoid TS checking error msg
@@ -25,6 +34,10 @@ const DashboardForm: FC<Props> = ({ updateHabits }) => {
       }
     } else {
       if (e.key === "Enter" || e.target.textContent === "Add New Habit") {
+        if (checkIfHabitNameExist(input)) {
+          setError("Habit name already taken! chose another one please.");
+          return;
+        }
         updateHabits("ADD", input, 40);
         setInput("");
       }

@@ -32,10 +32,3 @@ const HabitsContainer: FC<Props> = ({ updateHabits, habits, loading }) => {
 };
 
 export default HabitsContainer;
-/**
- * 
- * 
- * : (
-        <h1 className="noHabit-msg">You haven't created any HABIT yet !</h1>
-      )
- */

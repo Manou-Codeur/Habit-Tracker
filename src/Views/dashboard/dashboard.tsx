@@ -88,7 +88,7 @@ const Dashboard: FC<Props> = ({ history, userAuthed }) => {
   if (httpErrors) throw new Error(httpErrors);
   return (
     <div className="dashboard">
-      <DashboardForm updateHabits={updateHabits} />
+      <DashboardForm updateHabits={updateHabits} habits={habits} />
       <HabitsContainer
         updateHabits={updateHabits}
         habits={habits}
