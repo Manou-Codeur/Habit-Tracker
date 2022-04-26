@@ -24,7 +24,7 @@ const DashboardForm: FC<Props> = ({ updateHabits }) => {
         setError("Please enter the habit name!");
       }
     } else {
-      if (e.key === "Enter") {
+      if (e.key === "Enter" || e.target.textContent === "Add New Habit") {
         updateHabits("ADD", input, 40);
         setInput("");
       }

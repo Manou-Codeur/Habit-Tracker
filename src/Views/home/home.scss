@@ -3,6 +3,9 @@
 .home {
   display: flex;
   justify-content: center;
+  max-width: 1600px;
+  margin: 0 auto;
+
 
   &__presentation {
     width: 50%;

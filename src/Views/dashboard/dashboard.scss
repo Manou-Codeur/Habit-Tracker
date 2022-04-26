@@ -2,6 +2,8 @@
 
 .dashboard {
     padding: 1em 1.5em;
+    max-width: 1600px;
+    margin: 0 auto;
 
     &__form {
         display: flex;
@@ -47,6 +49,15 @@
         padding: 1em;
         margin-top: 1.5em;
         border-radius: 1em;
+
+        .noHabit-msg {
+            font-size: 1.5em;
+            color: $secondaryColor;
+        }
+
+        .loading-msg {
+            font-size: 1em;
+        }
     }
 
     @media only screen and (max-width: 970px) {

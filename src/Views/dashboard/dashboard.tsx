@@ -13,8 +13,9 @@ interface Props extends RouteComponentProps<any> {
 }
 
 const Dashboard: FC<Props> = ({ history, userAuthed }) => {
-  const [habits, setHabits] = useState<habitsType[]>([]);
+  const [habits, setHabits] = useState<habitsType[] | []>([]);
   const [httpErrors, setHttpErrors] = useState<any>(null);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const firebase = useContext(FirebaseContext);
 
@@ -33,12 +34,13 @@ const Dashboard: FC<Props> = ({ history, userAuthed }) => {
   const getHabits = async () => {
     try {
       const snapshot = await firebase!.getHabits(userAuthed!).get();
-      const habitsArr = snapshot.val() || [];
+      const habitsArr = (Array.isArray(snapshot.val()) && snapshot.val()) || [];
 
       setHabits(habitsArr);
     } catch (error) {
       setHttpErrors(error);
     }
+    setLoading(false);
   };
 
   const updateState = (
@@ -87,7 +89,11 @@ const Dashboard: FC<Props> = ({ history, userAuthed }) => {
   return (
     <div className="dashboard">
       <DashboardForm updateHabits={updateHabits} />
-      <HabitsContainer updateHabits={updateHabits} habits={habits} />
+      <HabitsContainer
+        updateHabits={updateHabits}
+        habits={habits}
+        loading={loading}
+      />
     </div>
   );
 };
