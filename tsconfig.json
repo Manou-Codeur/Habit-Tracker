@@ -19,7 +19,7 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "strict": true,
-    "strictFunctionTypes": true,
+    "strictFunctionTypes": false
   },
   "include": [
     "src"

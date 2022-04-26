@@ -50,7 +50,6 @@ class Firebase {
     this.auth.sendPasswordResetEmail(email);
 
   //db methods
-  users: firebaseTypes.usersType = () => this.db.ref("/users");
   user: firebaseTypes.userType = uid => this.db.ref(`users/${uid}`);
 
   addUser: firebaseTypes.addUserType = ({ name, email, uid }) =>
@@ -60,32 +59,43 @@ class Firebase {
       habits: "[]",
     });
 
-  getHabitsIds: firebaseTypes.getHabitsIdsType = uid =>
+  getHabits: firebaseTypes.getHabitsType = uid =>
     this.db.ref(`/users/${uid}/habits`);
 
-  //   addHabit = async (uid: string, habitId: string) => {
-  //     //get curr ids and merge them with new ones then update the db
-  //     const currList = this.getHabitsIds(uid);
-  //     try {
-  //       const snap = await currList.get();
-  //       var updates = {};
-  //       let habitsIds = [habitId];
+  habitsManager: firebaseTypes.habitsManagerType = async (
+    uid,
+    { type, habitName, left }
+  ) => {
+    //get curr habits and merge them with new ones then update the db
+    const currList = this.getHabits(uid);
+    try {
+      const snap = await currList.get();
+      var updates: any = {};
+      let habitsArr: { name: string; left: number }[] = [];
 
-  //       if (Array.isArray(snap.val())) {
-  //         habitsIds.push(...snap.val());
-  //       }
+      //check if there's any items already in the db
+      if (Array.isArray(snap.val())) {
+        habitsArr.push(...snap.val());
+      }
 
-  //       //removes duplicate
-  //       habitsIds = [...new Set(habitsIds)];
+      //add, update or delete a habit
+      if (type === "ADD") {
+        habitsArr.push({ name: habitName, left: left! });
+      } else if (type === "UPDATE") {
+        const index = habitsArr.findIndex(habit => habit.name === habitName);
+        habitsArr[index].left = left!;
+      } else if (type === "DELETE") {
+        habitsArr = habitsArr.filter(habit => habit.name !== habitName);
+      }
 
-  //       updates["/users/" + uid + "/recentAlbums"] = habitsIds;
-  //       this.db.ref().update(updates);
-  //     } catch (err) {
-  //       return await Promise.reject(
-  //         "There is an unexpected error, please reload the page!"
-  //       );
-  //     }
-  //   };
+      updates["/users/" + uid + "/habits"] = habitsArr;
+      this.db.ref().update(updates);
+    } catch (err) {
+      return await Promise.reject(
+        "There is an unexpected error, please reload the page!"
+      );
+    }
+  };
 }
 
 export default Firebase;

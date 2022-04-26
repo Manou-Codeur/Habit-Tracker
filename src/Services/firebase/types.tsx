@@ -1,7 +1,6 @@
-export type signUpType = (email: string, password: string) => void;
-export type signInType = (email: string, password: string) => void;
-export type resetPassType = (email: string) => void;
-export type usersType = () => void;
+export type signUpType = (email: string, password: string) => Promise<any>;
+export type signInType = (email: string, password: string) => Promise<any>;
+export type resetPassType = (email: string) => Promise<any>;
 export type userType = (uid: string) => any;
 export type addUserType = ({
   name,
@@ -11,15 +10,25 @@ export type addUserType = ({
   name: string;
   email: string;
   uid: string;
-}) => void;
-export type getHabitsIdsType = (uid: string) => void;
+}) => Promise<any>;
+export type getHabitsType = (uid: string) => {
+  get: () => Promise<{ val: () => [] }>;
+};
+export type habitsManagerType = (
+  uid: string,
+  action: {
+    type: "ADD" | "UPDATE" | "DELETE";
+    habitName: string;
+    left: number | undefined;
+  }
+) => Promise<any>;
 
 export interface MethodsTypes {
   doCreateUserWithEmailAndPassword: signUpType;
   doSignInWithEmailAndPassword: signInType;
   doResetPassword: resetPassType;
-  users: usersType;
   user: userType;
   addUser: addUserType;
-  getHabitsIds: getHabitsIdsType;
+  getHabits: getHabitsType;
+  habitsManager: habitsManagerType;
 }

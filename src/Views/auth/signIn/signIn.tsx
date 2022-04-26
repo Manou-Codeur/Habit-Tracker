@@ -61,3 +61,5 @@ const SignIn: FC<SignInProps> = ({
 
 const inputs = ["email", "password"];
 export default withForm(SignIn, inputs);
+//exported : <SignIn  />
+// actually it has the submitfn... and the rrd props in it and also firebase
