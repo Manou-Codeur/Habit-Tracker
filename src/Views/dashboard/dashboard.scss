@@ -63,4 +63,15 @@
     @media only screen and (max-width: 970px) {
         font-size: 13px;
     }
+    
+    @media only screen and (max-width: 500px) {
+        &__form {
+            flex-direction: column-reverse;
+
+            input {
+                width: 100%;
+                margin: .5em 0;
+            }
+        }       
+    }
 }

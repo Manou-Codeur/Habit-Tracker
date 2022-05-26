@@ -1,6 +1,7 @@
 import { FC } from "react";
 
 import { ReactComponent as TrashIcon } from "../../../../Assets/img/trash.svg";
+import { ReactComponent as ResetIcon } from "../../../../Assets/img/refresh.svg";
 import { habitsManagerType, habitsType } from "../../types";
 
 import "./habitItem.scss";
@@ -10,17 +11,20 @@ interface Props {
   updateHabits: habitsManagerType;
 }
 
-type updateProgressType = (left: number, operator: "+" | "-") => number;
+type updateProgressType = (
+  left: number,
+  action: "decrease days left" | "reset days left"
+) => number;
 
 const HabitItem: FC<Props> = ({ data: { name, left }, updateHabits }) => {
   const countProgress = (): number => {
-    return 100 - (left * 100) / 40;
+    return 100 - (left * 100) / 66;
   };
 
   const updateProgress: updateProgressType = (left, operator) => {
-    if (operator === "+" && left < 40) {
-      return left + 1;
-    } else if (operator === "-" && left > 0) {
+    if (operator === "reset days left" && left < 66) {
+      return 66;
+    } else if (operator === "decrease days left" && left > 0) {
       return left - 1;
     }
     return left;
@@ -42,18 +46,26 @@ const HabitItem: FC<Props> = ({ data: { name, left }, updateHabits }) => {
         <div
           className="add"
           onClick={() =>
-            updateHabits("UPDATE", name, updateProgress(left, "-"))
+            updateHabits(
+              "UPDATE",
+              name,
+              updateProgress(left, "decrease days left")
+            )
           }
         >
           +
         </div>
         <div
-          className="minus"
+          className="reset"
           onClick={() =>
-            updateHabits("UPDATE", name, updateProgress(left, "+"))
+            updateHabits(
+              "UPDATE",
+              name,
+              updateProgress(left, "reset days left")
+            )
           }
         >
-          -
+          <ResetIcon />
         </div>
         <div
           className="remove"

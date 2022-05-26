@@ -13,6 +13,7 @@
         padding: 1em 1.5em;
         border-radius: 10em;
         width: 85%;
+        overflow: hidden;
 
 
         .habit-item__progress_done {
@@ -30,6 +31,10 @@
         .habit-item__name {
             color: white;
             z-index: 10;
+            width: 60%;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
         }
         
         .habit-item__time-left {
@@ -45,7 +50,7 @@
         width: 15%;
         min-width: 10em;
 
-        .add, .minus, .remove {
+        .add, .reset, .remove {
             width: 3em;
             height: 3em;
             border-radius: 100%;
@@ -60,9 +65,13 @@
             color: white;
         }
         
-        .minus {
+        .reset {
             background-color: $primaryColor;
             color: $secondaryColor;
+
+            svg {
+                height: 1.5em;
+            }
         }
         
         .remove {
