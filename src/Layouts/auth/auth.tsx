@@ -1,5 +1,5 @@
 import { Route, Switch, Redirect } from "react-router-dom";
-import { useContext, FC } from "react";
+import { useContext, FC, useEffect } from "react";
 import { RouteComponentProps } from "react-router-dom";
 
 import SignIn from "../../Views/auth/signIn/signIn";
@@ -36,7 +36,9 @@ const AuthRouter = () => {
 
 const Auth: FC<Props> = ({ history, userAuthed }) => {
   //If the user is authed then redirect him to the dashboard component
-  if (userAuthed) history.push("/dashboard");
+  useEffect(() => {
+    if (userAuthed) history.push("/dashboard");
+  });
 
   return (
     <div className="auth">

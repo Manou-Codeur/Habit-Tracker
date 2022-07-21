@@ -47,7 +47,8 @@ const Dashboard: FC<Props> = ({ history, userAuthed }) => {
     type: any,
     habitName: any,
     originalState: any,
-    left: any
+    left: any,
+    skip: any
   ) => {
     const copy = [...originalState];
     const index = copy.findIndex(habit => habit.name === habitName);
@@ -55,13 +56,19 @@ const Dashboard: FC<Props> = ({ history, userAuthed }) => {
       copy.splice(index, 1);
     } else if (type === "UPDATE") {
       copy[index].left = left;
+      copy[index].skip = skip;
     } else if (type === "ADD") {
-      copy.push({ name: habitName, left: left! });
+      copy.push({ name: habitName, left: left!, skip });
     }
     setHabits(copy);
   };
 
-  const updateHabits: habitsManagerType = async (type, habitName, left) => {
+  const updateHabits: habitsManagerType = async (
+    type,
+    habitName,
+    left,
+    skip
+  ) => {
     //I used a pattern that consist of updating the state and the db at the same time
     //but i'm not fetching the data from the server at each update, and if there was
     //an error i'll reset the state to the latest version.
@@ -70,13 +77,14 @@ const Dashboard: FC<Props> = ({ history, userAuthed }) => {
       originalState = [...habits];
     }
 
-    updateState(type, habitName, originalState, left);
+    updateState(type, habitName, originalState, left, skip);
 
     try {
       await firebase!.habitsManager(userAuthed!, {
         type: type,
         habitName: habitName,
         left: left,
+        skip: skip,
       });
     } catch (error) {
       setHabits(originalState);

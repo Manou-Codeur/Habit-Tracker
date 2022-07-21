@@ -38,7 +38,7 @@ const DashboardForm: FC<Props> = ({ updateHabits, habits }) => {
           setError("Habit name already taken! chose another one please.");
           return;
         }
-        updateHabits("ADD", input, 66);
+        updateHabits("ADD", input, 66, 0);
         setInput("");
       }
     }

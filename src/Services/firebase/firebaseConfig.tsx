@@ -64,14 +64,14 @@ class Firebase {
 
   habitsManager: firebaseTypes.habitsManagerType = async (
     uid,
-    { type, habitName, left }
+    { type, habitName, left, skip }
   ) => {
     //get curr habits and merge them with new ones then update the db
     const currList = this.getHabits(uid);
     try {
       const snap = await currList.get();
       var updates: any = {};
-      let habitsArr: { name: string; left: number }[] = [];
+      let habitsArr: { name: string; left: number; skip: number }[] = [];
 
       //check if there's any items already in the db
       if (Array.isArray(snap.val())) {
@@ -80,10 +80,11 @@ class Firebase {
 
       //add, update or delete a habit
       if (type === "ADD") {
-        habitsArr.push({ name: habitName, left: left! });
+        habitsArr.push({ name: habitName, left: left!, skip: skip! });
       } else if (type === "UPDATE") {
         const index = habitsArr.findIndex(habit => habit.name === habitName);
         habitsArr[index].left = left!;
+        habitsArr[index].skip = skip!;
       } else if (type === "DELETE") {
         habitsArr = habitsArr.filter(habit => habit.name !== habitName);
       }

@@ -20,6 +20,7 @@ export type habitsManagerType = (
     type: "ADD" | "UPDATE" | "DELETE";
     habitName: string;
     left: number | undefined;
+    skip: number | undefined;
   }
 ) => Promise<any>;
 

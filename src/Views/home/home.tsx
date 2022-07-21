@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import ReactComponent from "../../Assets/img/Habit-Vector.jpg";
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { RouteComponentProps } from "react-router-dom";
 
 import "./home.scss";
@@ -11,7 +11,9 @@ interface Props extends RouteComponentProps<any> {
 
 const Home: FC<Props> = ({ history, userAuthed }) => {
   //If the user is authed then redirect him to the dashboard component
-  if (userAuthed) history.push("/dashboard");
+  useEffect(() => {
+    if (userAuthed) history.push("/dashboard");
+  });
 
   return (
     <div className="home">

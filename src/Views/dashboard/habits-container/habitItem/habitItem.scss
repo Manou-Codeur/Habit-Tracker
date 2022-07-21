@@ -50,7 +50,7 @@
         width: 15%;
         min-width: 10em;
 
-        .add, .reset, .remove {
+        .add, .reset, .remove, .skip {
             width: 3em;
             height: 3em;
             border-radius: 100%;
@@ -80,6 +80,28 @@
             svg {
                 height: 1em;
                 fill: $secondaryColor;
+            }
+        }
+
+        .skip {
+            border: .5px solid $primaryColor;
+            position: relative;
+            overflow: hidden;
+            
+            &_progress {
+                transition: all 1s;
+                background-color: $secondaryColor;
+                height: 100%;
+                width: 100%;
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                z-index: 10;
+            }
+
+            img {
+                height: 1.2em;
+                z-index: 100;
             }
         }
     }
